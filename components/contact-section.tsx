@@ -60,7 +60,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">mail.chhatrarana@gmail.com</p>
+                  <p className="text-muted-foreground">info@chhatrarana.com.np</p>
                 </div>
               </div>
 
