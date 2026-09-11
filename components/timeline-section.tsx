@@ -8,8 +8,8 @@ export function TimelineSection() {
   const experiences = [
     {
       year: "Aug 2025 - Present",
-      title: "Lead Developer & Code Optimizer",
-      company: "Astoria Company (Lead Exchange)",
+      title: "Software Engineer",
+      company: "Astoria Company Texas, USA",
       description:
         "Working with lead management software optimization and refactoring. Implementing AWS services and Kubernetes pod management for scalable lead processing systems with database optimization.",
       technologies: ["AWS", "Kubernetes", "Database Optimization", "Lead Management", "Code Refactoring"],
