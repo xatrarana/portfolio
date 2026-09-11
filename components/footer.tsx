@@ -7,7 +7,7 @@ export function Footer() {
             <h3 className="text-xl font-bold">
               Chhatra <span className="text-primary">Rana</span>
             </h3>
-            <p className="text-sm text-muted-foreground">Software Developer & Cybersecurity Enthusiast</p>
+            <p className="text-sm text-muted-foreground">Software Engineer & Cybersecurity Enthusiast</p>
           </div>
 
           <div className="text-sm text-muted-foreground">
