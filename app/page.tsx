@@ -1,42 +1,37 @@
-import { HeroSection } from "@/components/hero-section"
-import { AboutSection } from "@/components/about-section"
-import { SkillsSection } from "@/components/skills-section"
-import { TimelineSection } from "@/components/timeline-section"
-import { Web3Section } from "@/components/web3-section"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
 import Script from "next/script"
+import { Nav } from "@/components/site/nav"
+import { Hero } from "@/components/site/hero"
+import { Work } from "@/components/site/work"
+import { Services } from "@/components/site/services"
+import { Experience } from "@/components/site/experience"
+import { Contact, Footer } from "@/components/site/contact"
+import { profile } from "@/lib/content"
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
       <Script id="ld-json" type="application/ld+json">
         {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'Person',
-          name: 'Chhatra Bahadur Rana',
-          url: 'https://chhatrarana.com.np',
-          jobTitle: 'Software Developer & Cybersecurity Enthusiast',
-          worksFor: {
-            '@type': 'Organization',
-            name: 'Freelance / Remote',
-          },
-          sameAs: [
-            'https://github.com/yourusername',
-            'https://linkedin.com/in/yourusername',
-            'https://twitter.com/yourusername',
-          ],
-          description:
-            'software developer and Certified cybersecurity and enthusiast with expertise in secure development, .NET, Laravel, and JavaScript.',
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Chhatra Bahadur Rana",
+          url: "https://chhatrarana.com.np",
+          jobTitle: profile.role,
+          worksFor: { "@type": "Organization", name: "Astoria Company" },
+          address: { "@type": "PostalAddress", addressLocality: "Kathmandu", addressCountry: "NP" },
+          sameAs: profile.socials.filter((s) => s.href.startsWith("http")).map((s) => s.href),
+          description: profile.intro,
         })}
       </Script>
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <TimelineSection />
-      {/* <Web3Section /> */}
-      <ContactSection />
+      <Nav />
+      <main>
+        <Hero />
+        <Work />
+        <Services />
+        <Experience />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
