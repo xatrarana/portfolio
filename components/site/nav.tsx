@@ -13,9 +13,16 @@ export function Nav({ base = "" }: { base?: string }) {
   return (
     <header className="nav">
       <div className="wrap">
-        <span className="pill" data-reveal="fade" style={delay(0)}>
-          <span className="dot" />
-          {profile.status}
+        <span data-reveal="fade" style={delay(0)}>
+          <TransitionLink href="/#top" className="brand" aria-label={`${profile.firstName} ${profile.lastName}, home`}>
+            <span className="full">
+              {profile.firstName} {profile.lastName}
+            </span>
+            <span className="short" aria-hidden="true">
+              {profile.firstName[0]}
+              {profile.lastName[0]}
+            </span>
+          </TransitionLink>
         </span>
         <ul data-reveal="fade" style={delay(80)}>
           {links.map((l) => (

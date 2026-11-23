@@ -2,8 +2,7 @@ export const profile = {
   firstName: "Chhatra",
   lastName: "Rana",
   role: "Software & Security Engineer",
-  intro:
-    "I build web systems that are secure from the first commit, and the detection tools that watch over them.",
+  intro: "Engineering secure software and the detection systems that defend it.",
   email: "mail@chhatrarana.com.np",
   location: "Kathmandu, Nepal",
   status: "Open to new roles",

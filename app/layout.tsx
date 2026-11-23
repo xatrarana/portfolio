@@ -1,5 +1,5 @@
 import type React from "react"
-import { Archivo, Manrope } from "next/font/google"
+import { Archivo, Instrument_Serif, Manrope, Mrs_Saint_Delafield } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { Motion } from "@/components/site/motion"
@@ -12,6 +12,21 @@ const archivo = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
   variable: "--font-archivo",
+  display: "swap",
+})
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
+  variable: "--font-serif",
+  display: "swap",
+})
+
+const signature = Mrs_Saint_Delafield({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-sign",
   display: "swap",
 })
 
@@ -79,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${manrope.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${archivo.variable} ${manrope.variable} ${serif.variable} ${signature.variable}`} suppressHydrationWarning>
        <head>
         <link rel="manifest" href="/site.webmanifest" />
         {/* Lets CSS hide not-yet-revealed elements only when JS is running. */}

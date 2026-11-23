@@ -8,7 +8,7 @@ const icons = { GitHub: Github, LinkedIn: Linkedin, npm: Package, Email: Mail } 
 
 export function Hero() {
   return (
-    <section className="hero" aria-label="Introduction">
+    <section className="hero" id="top" aria-label="Introduction">
       <div className="wrap">
         <h1 className="name" aria-label={`${profile.firstName} ${profile.lastName}`}>
           <span className="w stroke" aria-hidden="true" data-reveal="name" style={delay(100)}>
@@ -21,7 +21,9 @@ export function Hero() {
         <div className="hero-stage">
           <div className="hero-left">
             <h2 data-reveal style={delay(650)}>{profile.role}</h2>
-            <p data-reveal style={delay(760)}>{profile.intro}</p>
+            <p data-reveal style={delay(760)}>
+              {profile.intro.split(/(secure)/).map((part, i) => (part === "secure" ? <em key={i}>{part}</em> : part))}
+            </p>
             <div data-reveal style={delay(870)}>
               <ArrowButton href="#contact">Let&apos;s collaborate</ArrowButton>
             </div>
