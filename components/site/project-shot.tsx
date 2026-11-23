@@ -56,6 +56,18 @@ export function ProjectShot({ kind }: { kind: ShotKind }) {
           <div className="ui-row"><span>8.8.8.8 · Google DNS</span><span className="sev s-lo">Clean</span></div>
         </div>
       )
+    case "cql":
+      return (
+        <div className="inner">
+          <div className="ui-top"><span>falcon / advanced event search</span><span>last 24h</span></div>
+          <div className="ui-title">Hunt encoded PowerShell across every host</div>
+          <div className="code">
+            <b>#event_simpleName</b>=<i>ProcessRollup2</i>{"\n| "}<b>CommandLine</b>=<i>/powershell.*-enc/i</i>{"\n| "}<b>groupBy</b>([ComputerName], function=count())
+          </div>
+          <div className="ui-row"><span>FIN-LAPTOP-07</span><span className="sev s-hi">14 hits</span></div>
+          <div className="ui-row"><span>HR-DESKTOP-02</span><span className="sev s-md">3 hits</span></div>
+        </div>
+      )
     case "code":
       return (
         <div className="inner">

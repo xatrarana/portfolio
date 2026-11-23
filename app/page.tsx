@@ -18,7 +18,10 @@ export default function Home() {
           name: "Chhatra Bahadur Rana",
           url: "https://chhatrarana.com.np",
           jobTitle: profile.role,
-          worksFor: { "@type": "Organization", name: "Astoria Company" },
+          worksFor: [
+            { "@type": "Organization", name: "Raechal Enterprise" },
+            { "@type": "Organization", name: "Astoria Company" },
+          ],
           address: { "@type": "PostalAddress", addressLocality: "Kathmandu", addressCountry: "NP" },
           sameAs: profile.socials.filter((s) => s.href.startsWith("http")).map((s) => s.href),
           description: profile.intro,

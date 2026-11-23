@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, type PointerEvent } from "react"
+import { useRef, useState } from "react"
 import { projects, type ProjectKind } from "@/lib/content"
+import { useFollow } from "./use-follow"
 import { delay } from "@/lib/reveal"
 import { SectionHead } from "./section-head"
 import { ProjectShot } from "./project-shot"
@@ -13,12 +14,31 @@ const filters: { id: "all" | ProjectKind; label: string }[] = [
   { id: "dev", label: "Development" },
 ]
 
-/** Moves the round "open" button to the pointer inside a project image. */
-function follow(e: PointerEvent<HTMLDivElement>) {
-  const el = e.currentTarget
-  const r = el.getBoundingClientRect()
-  el.style.setProperty("--cx", `${e.clientX - r.left}px`)
-  el.style.setProperty("--cy", `${e.clientY - r.top}px`)
+type Project = (typeof projects)[number]
+
+/** Project card whose round "open" button glides after the cursor. */
+function ProjectCard({ p }: { p: Project }) {
+  const shot = useRef<HTMLDivElement>(null)
+  const follow = useFollow(shot, { vars: ["--cx", "--cy"], ease: 0.18 })
+  return (
+    <a className="proj" href={p.href} target="_blank" rel="noopener noreferrer">
+      <div className="shot" ref={shot} {...follow}>
+        <span className="badge">{p.badge}</span>
+        <span className="open" aria-hidden="true">↗</span>
+        <ProjectShot kind={p.shot} />
+      </div>
+      <div className="proj-meta">
+        <h3>
+          {p.name} <span>· {p.tagline}</span>
+        </h3>
+        <div className="chips">
+          {p.chips.map((c) => (
+            <span key={c}>{c}</span>
+          ))}
+        </div>
+      </div>
+    </a>
+  )
 }
 
 export function Work() {
@@ -42,24 +62,8 @@ export function Work() {
         </div>
         <div className="work-grid">
           {shown.map((p, i) => (
-            <div key={`${filter}-${p.name}`} data-reveal style={delay((i % 2) * 140)}>
-              <a className="proj" href={p.href} target="_blank" rel="noopener noreferrer">
-                <div className="shot" onPointerMove={follow} onPointerEnter={follow}>
-                  <span className="badge">{p.badge}</span>
-                  <span className="open" aria-hidden="true">↗</span>
-                  <ProjectShot kind={p.shot} />
-                </div>
-                <div className="proj-meta">
-                  <h3>
-                    {p.name} <span>· {p.tagline}</span>
-                  </h3>
-                  <div className="chips">
-                    {p.chips.map((c) => (
-                      <span key={c}>{c}</span>
-                    ))}
-                  </div>
-                </div>
-              </a>
+            <div key={`${filter}-${p.name}`} className={p.featured ? "feat" : undefined} data-reveal style={delay((i % 2) * 140)}>
+              <ProjectCard p={p} />
             </div>
           ))}
         </div>
