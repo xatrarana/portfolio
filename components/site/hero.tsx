@@ -1,55 +1,37 @@
-import Image from "next/image"
 import { Github, Linkedin, Mail, Package } from "lucide-react"
 import { profile } from "@/lib/content"
+import { delay } from "@/lib/reveal"
 import { ArrowButton } from "./arrow-button"
+import { Portrait } from "./portrait"
 
 const icons = { GitHub: Github, LinkedIn: Linkedin, npm: Package, Email: Mail } as const
-
-function Letters({ word, offset }: { word: string; offset: number }) {
-  return (
-    <>
-      {Array.from(word).map((ch, i) => (
-        <span key={i} className="ch" style={{ ["--i" as string]: i + offset }}>
-          {ch}
-        </span>
-      ))}
-    </>
-  )
-}
 
 export function Hero() {
   return (
     <section className="hero" aria-label="Introduction">
       <div className="wrap">
         <h1 className="name" aria-label={`${profile.firstName} ${profile.lastName}`}>
-          <span className="w stroke" aria-hidden="true">
-            <Letters word={profile.firstName} offset={0} />
+          <span className="w stroke" aria-hidden="true" data-reveal="name" style={delay(100)}>
+            {profile.firstName}
           </span>
-          <span className="w" aria-hidden="true">
-            <Letters word={profile.lastName} offset={profile.firstName.length - 1} />
+          <span className="w" aria-hidden="true" data-reveal="name" style={delay(260)}>
+            {profile.lastName}
           </span>
         </h1>
         <div className="hero-stage">
           <div className="hero-left">
-            <h2>{profile.role}</h2>
-            <p>{profile.intro}</p>
-            <ArrowButton href="#contact">Let&apos;s collaborate</ArrowButton>
+            <h2 data-reveal style={delay(650)}>{profile.role}</h2>
+            <p data-reveal style={delay(760)}>{profile.intro}</p>
+            <div data-reveal style={delay(870)}>
+              <ArrowButton href="#contact">Let&apos;s collaborate</ArrowButton>
+            </div>
           </div>
-          <figure className="portrait">
-            <Image
-              src="/chhatra-portrait.webp"
-              alt={`Portrait of ${profile.firstName} ${profile.lastName}`}
-              width={860}
-              height={996}
-              priority
-              sizes="(max-width: 820px) 360px, 460px"
-            />
-          </figure>
+          <Portrait />
           <ul className="socials">
-            {profile.socials.map((s) => {
+            {profile.socials.map((s, i) => {
               const Icon = icons[s.label as keyof typeof icons]
               return (
-                <li key={s.label}>
+                <li key={s.label} data-reveal="right" style={delay(760 + i * 110)}>
                   <a href={s.href} {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                     {Icon ? <Icon aria-hidden="true" /> : null}
                     <span>{s.label}</span>

@@ -1,5 +1,6 @@
 import { profile, projects, services, experience } from "@/lib/content"
 import { ArrowButton } from "./arrow-button"
+import { delay } from "@/lib/reveal"
 
 export function Nav() {
   const links = [
@@ -11,11 +12,11 @@ export function Nav() {
   return (
     <header className="nav">
       <div className="wrap">
-        <span className="pill">
+        <span className="pill" data-reveal="fade" style={delay(0)}>
           <span className="dot" />
           {profile.status}
         </span>
-        <ul>
+        <ul data-reveal="fade" style={delay(80)}>
           {links.map((l) => (
             <li key={l.href}>
               <a href={l.href}>
@@ -25,7 +26,9 @@ export function Nav() {
             </li>
           ))}
         </ul>
-        <ArrowButton href="#contact">Let&apos;s talk</ArrowButton>
+        <div data-reveal="fade" style={delay(160)}>
+          <ArrowButton href="#contact">Let&apos;s talk</ArrowButton>
+        </div>
       </div>
     </header>
   )

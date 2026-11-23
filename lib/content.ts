@@ -83,30 +83,34 @@ export const projects: {
   },
 ]
 
-export const services = [
+export const services: { title: string; body: string; stack: string[]; shot: ShotKind }[] = [
   {
     title: "Software development",
     body: "Full-stack web applications and APIs, from the database to deployment on AWS and Kubernetes.",
     stack: ["TypeScript", "Next.js", "Node.js", ".NET", "Laravel", "PostgreSQL"],
+    shot: "code",
   },
   {
     title: "Security engineering",
     body: "Penetration testing, vulnerability assessment and secure code review for web applications.",
     stack: ["Pentesting", "Code review", "Threat modeling"],
+    shot: "policy",
   },
   {
     title: "Detection & SIEM",
     body: "Network intrusion detection and SIEM deployments that turn logs into useful alerts.",
     stack: ["Wazuh", "Snort", "CrowdStrike LogScale", "Security Onion"],
+    shot: "bars",
   },
   {
     title: "Training & workshops",
     body: "Hands-on secure development and SOC workshops for teams and students.",
     stack: ["Secure coding", "SOC home labs"],
+    shot: "ioc",
   },
 ]
 
-export const experience = [
+export const experience: { company: string; role: string; from: string; to: string | null; tech: string[] }[] = [
   { company: "Astoria Company", role: "Software Engineer · Texas, USA", from: "Aug 2025", to: null, tech: ["AWS", "Kubernetes", "Databases"] },
   { company: "Security Training Program", role: "Cybersecurity Analyst Intern", from: "Aug 2025", to: "Nov 2025", tech: ["Snort", "Wazuh SIEM", "NIDS"] },
   { company: "Aarshia Infotech", role: ".NET Developer · Kathmandu", from: "Apr 2024", to: "Jul 2024", tech: [".NET", "C#", "SQL Server"] },

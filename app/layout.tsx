@@ -76,9 +76,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${manrope.variable}`} suppressHydrationWarning>
        <head>
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Lets CSS hide not-yet-revealed elements only when JS is running. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body className="antialiased">
         <Suspense fallback={null}>
