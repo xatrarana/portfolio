@@ -52,9 +52,9 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/me.webp",
-        width: 256,
-        height: 256,
+        url: "/chhatra-portrait.webp",
+        width: 860,
+        height: 996,
         alt: "Portrait of Chhatra Rana",
       },
     ],
@@ -63,7 +63,7 @@ export const metadata = {
     card: "summary",
     title,
     description,
-    images: ["/me.webp"],
+    images: ["/chhatra-portrait.webp"],
     creator: "@Xatra101",
     site: "@Xatra101",
   },
