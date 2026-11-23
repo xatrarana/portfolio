@@ -4,14 +4,14 @@ export const profile = {
   role: "Software & Security Engineer",
   intro:
     "I build web systems that are secure from the first commit, and the detection tools that watch over them.",
-  email: "info@chhatrarana.com.np",
+  email: "mail@chhatrarana.com.np",
   location: "Kathmandu, Nepal",
   status: "Open to new roles",
   socials: [
     { label: "GitHub", short: "GH", href: "https://github.com/xatrarana" },
     { label: "LinkedIn", short: "in", href: "https://np.linkedin.com/in/chhatra-rana-73b5991b1" },
     { label: "npm", short: "np", href: "https://www.npmjs.com/package/mockini" },
-    { label: "Email", short: "@", href: "mailto:info@chhatrarana.com.np" },
+    { label: "Email", short: "@", href: "mailto:mail@chhatrarana.com.np" },
   ],
 }
 
