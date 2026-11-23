@@ -4,7 +4,8 @@ import { Hero } from "@/components/site/hero"
 import { Work } from "@/components/site/work"
 import { Services } from "@/components/site/services"
 import { Experience } from "@/components/site/experience"
-import { Contact, Footer } from "@/components/site/contact"
+import { Contact } from "@/components/site/contact"
+import { Footer } from "@/components/site/site-footer"
 import { profile } from "@/lib/content"
 
 export default function Home() {
@@ -27,7 +28,7 @@ export default function Home() {
         })}
       </Script>
       <Nav />
-      <main>
+      <main className="cover">
         <Hero />
         <Work />
         <Services />

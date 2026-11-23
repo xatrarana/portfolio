@@ -71,13 +71,3 @@ export function Contact({ after = "night" }: { after?: "night" | "light" }) {
   )
 }
 
-export function Footer() {
-  return (
-    <footer className="site-footer">
-      <div className="wrap">
-        <span>© {new Date().getFullYear()} {profile.firstName} {profile.lastName}</span>
-        <span>{profile.location}</span>
-      </div>
-    </footer>
-  )
-}

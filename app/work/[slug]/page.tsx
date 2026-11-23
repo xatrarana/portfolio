@@ -5,7 +5,8 @@ import { delay } from "@/lib/reveal"
 import { ArrowButton } from "@/components/site/arrow-button"
 import { ProjectShot } from "@/components/site/project-shot"
 import { ProjectCard } from "@/components/site/work"
-import { Contact, Footer } from "@/components/site/contact"
+import { Contact } from "@/components/site/contact"
+import { Footer } from "@/components/site/site-footer"
 import { TransitionLink } from "@/components/site/page-transition"
 
 type Params = { params: { slug: string } }
@@ -53,7 +54,7 @@ export default function ProjectPage({ params }: Params) {
 
   return (
     <>
-      <main className="detail">
+      <main className="detail cover">
         <div className="wrap">
           <div className="detail-bar">
             <span data-reveal="fade" style={delay(80)}>
