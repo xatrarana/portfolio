@@ -2,6 +2,9 @@ import type React from "react"
 import { Archivo, Manrope } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { Motion } from "@/components/site/motion"
+import { SmoothScroll } from "@/components/site/smooth-scroll"
+import { PageTransition } from "@/components/site/page-transition"
 import "./globals.css"
 import "./site.css"
 
@@ -84,7 +87,10 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <Suspense fallback={null}>
+          <Motion />
+          <SmoothScroll />
           {children}
+          <PageTransition />
           <Analytics />
         </Suspense>
       </body>

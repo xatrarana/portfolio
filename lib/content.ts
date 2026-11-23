@@ -18,7 +18,10 @@ export const profile = {
 export type ProjectKind = "sec" | "dev"
 export type ShotKind = "ioc" | "vault" | "policy" | "bars" | "intel" | "code" | "cql"
 
+export type Highlight = { title: string; body: string }
+
 export const projects: {
+  slug: string
   name: string
   tagline: string
   href: string
@@ -27,8 +30,14 @@ export const projects: {
   chips: string[]
   shot: ShotKind
   featured?: boolean
+  /** Detail page copy. */
+  about: string
+  service: string
+  link: string
+  highlights: Highlight[]
 }[] = [
   {
+    slug: "crowdstrike-soc-homelab",
     name: "CrowdStrike SOC home lab",
     tagline: "Enterprise-style SOC on free tooling",
     href: "https://github.com/xatrarana/crowdstrike-logscale-homelab",
@@ -37,8 +46,18 @@ export const projects: {
     chips: ["Security", "LogScale", "CQL", "Security Onion"],
     shot: "cql",
     featured: true,
+    about: "A hands-on guide to building an enterprise-style security operations centre at home on free tooling. CrowdStrike Falcon LogScale handles search and dashboards, Security Onion watches the network, and CQL queries turn raw events into detections and threat hunts.",
+    service: "SIEM engineering",
+    link: "Read the guide",
+    highlights: [
+      { title: "Log pipeline", body: "Endpoint and network logs shipped into LogScale and parsed into searchable fields." },
+      { title: "CQL hunting", body: "Ready-to-run queries, like finding encoded PowerShell across every host." },
+      { title: "Network visibility", body: "Security Onion as the network sensor alongside the SIEM." },
+      { title: "Free to reproduce", body: "Every step uses free tiers and open-source tools, documented end to end." },
+    ],
   },
   {
+    slug: "opensoc-toolkit",
     name: "OpenSOC Toolkit",
     tagline: "Investigation workspace for SOC analysts",
     href: "https://opensoc.vercel.app",
@@ -46,8 +65,18 @@ export const projects: {
     kind: "sec",
     chips: ["Security", "Next.js", "TypeScript"],
     shot: "ioc",
+    about: "An investigation workspace for SOC analysts. Paste an IP, domain or file hash and get the context you need to triage it, without hopping between a dozen browser tabs.",
+    service: "Security engineering",
+    link: "Live preview",
+    highlights: [
+      { title: "Any indicator", body: "IP addresses, domains and file hashes from a single search box." },
+      { title: "Triage at a glance", body: "Each indicator gets a clear severity so the next step is obvious." },
+      { title: "Built for analysts", body: "Designed around the way an alert is actually investigated." },
+      { title: "Runs in the browser", body: "Nothing to install: open it and start investigating." },
+    ],
   },
   {
+    slug: "vaultlock",
     name: "VaultLock",
     tagline: "Open-source password manager",
     href: "https://vaultlock.vercel.app",
@@ -55,8 +84,18 @@ export const projects: {
     kind: "dev",
     chips: ["Development", "E2E encryption", "TypeScript"],
     shot: "vault",
+    about: "An open-source password manager where your vault is encrypted on your device before it is ever sent anywhere, so the server only stores data it cannot read.",
+    service: "Software development",
+    link: "Live preview",
+    highlights: [
+      { title: "End-to-end encrypted", body: "Encryption happens on the device, before data leaves it." },
+      { title: "Zero-knowledge storage", body: "The server keeps ciphertext only." },
+      { title: "Open source", body: "The code is public, so the security claims can be checked." },
+      { title: "Typed end to end", body: "Written in TypeScript from the UI down to the API." },
+    ],
   },
   {
+    slug: "sentinelgate",
     name: "SentinelGate",
     tagline: "Security layer for agentic AI",
     href: "https://github.com/xatrarana/sentinelgate",
@@ -64,8 +103,18 @@ export const projects: {
     kind: "sec",
     chips: ["Security", "Python", "LLM"],
     shot: "policy",
+    about: "A security layer that sits between an AI agent and its tools. Every tool call is checked against policy and either allowed, sent for human review, or blocked before it runs.",
+    service: "AI security",
+    link: "View on GitHub",
+    highlights: [
+      { title: "Policy on every call", body: "Tool calls are evaluated before they execute, not after." },
+      { title: "Allow, review, block", body: "Three clear outcomes, so risky actions can wait for a human." },
+      { title: "Agent-aware", body: "Policies can differ per agent and per tool." },
+      { title: "Audit trail", body: "Every decision is logged for later review." },
+    ],
   },
   {
+    slug: "lightweight-nids",
     name: "Lightweight NIDS",
     tagline: "Snort-based intrusion detection",
     href: "https://github.com/xatrarana/Network-Intrusion-Detection-System",
@@ -73,8 +122,18 @@ export const projects: {
     kind: "sec",
     chips: ["Security", "Lua", "Snort"],
     shot: "bars",
+    about: "A network intrusion detection system built on Snort, with custom rules and Lua logic that raise alerts on suspicious traffic as it happens.",
+    service: "Security engineering",
+    link: "View on GitHub",
+    highlights: [
+      { title: "Rule-based detection", body: "Custom Snort rules tuned for common attack patterns." },
+      { title: "Lua extensions", body: "Lua scripting for logic that plain rules cannot express." },
+      { title: "Real-time alerts", body: "Traffic is inspected and flagged as it flows." },
+      { title: "Lightweight", body: "Small enough to run in a home lab or a single sensor." },
+    ],
   },
   {
+    slug: "threatintel",
     name: "ThreatIntel",
     tagline: "Modular threat intelligence platform",
     href: "https://threatintel-iudf.onrender.com",
@@ -82,8 +141,18 @@ export const projects: {
     kind: "sec",
     chips: ["Security", "Python", "SIEM"],
     shot: "intel",
+    about: "A modular threat intelligence platform for checking IP reputation and managing indicators of compromise, with results that can be synced into a SIEM.",
+    service: "Security engineering",
+    link: "Live preview",
+    highlights: [
+      { title: "IP reputation", body: "Look up an address and see reports and categories at once." },
+      { title: "IOC management", body: "Keep indicators organised in one place." },
+      { title: "SIEM sync", body: "Push intelligence to where detections run." },
+      { title: "Modular", body: "Sources and outputs can be added as separate modules." },
+    ],
   },
   {
+    slug: "mockini",
     name: "mockini",
     tagline: "Mock REST API from one JSON file",
     href: "https://www.npmjs.com/package/mockini",
@@ -91,6 +160,15 @@ export const projects: {
     kind: "dev",
     chips: ["Development", "CLI", "TypeScript"],
     shot: "code",
+    about: "A command-line tool that spins up a mock REST API from one JSON file, so front-end work can start before the real backend exists.",
+    service: "Software development",
+    link: "View on npm",
+    highlights: [
+      { title: "One config file", body: "Port and routes live in a single mockini.json." },
+      { title: "Zero setup", body: "Run it with npx, no install or boilerplate." },
+      { title: "Static or custom", body: "Serve JSON files or define status codes per route." },
+      { title: "Published on npm", body: "Versioned and ready to add to any project." },
+    ],
   },
 ]
 

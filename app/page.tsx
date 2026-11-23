@@ -6,7 +6,6 @@ import { Services } from "@/components/site/services"
 import { Experience } from "@/components/site/experience"
 import { Contact, Footer } from "@/components/site/contact"
 import { profile } from "@/lib/content"
-import { Motion } from "@/components/site/motion"
 
 export default function Home() {
   return (
@@ -27,7 +26,6 @@ export default function Home() {
           description: profile.intro,
         })}
       </Script>
-      <Motion />
       <Nav />
       <main>
         <Hero />

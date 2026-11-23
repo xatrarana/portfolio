@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { TransitionLink } from "./page-transition"
 
 type Props = {
   href?: string
@@ -20,6 +21,13 @@ export function ArrowButton({ href, variant = "dark", external, onClick, childre
       </span>
     </>
   )
+  if (href?.startsWith("/")) {
+    return (
+      <TransitionLink className={className} href={href}>
+        {inner}
+      </TransitionLink>
+    )
+  }
   if (href) {
     return (
       <a className={className} href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>

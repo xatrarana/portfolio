@@ -8,7 +8,7 @@ import { ArrowButton } from "./arrow-button"
 
 const icons = { GitHub: Github, LinkedIn: Linkedin, npm: Package, Email: Mail } as const
 
-export function Contact() {
+export function Contact({ after = "night" }: { after?: "night" | "light" }) {
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try {
@@ -20,8 +20,13 @@ export function Contact() {
     }
   }
   return (
-    <div className="contact-wrap" id="contact">
+    <div className={`contact-wrap after-${after}`} id="contact">
       <section className="contact">
+        <div className="cloud" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </div>
         <div className="wrap">
           <span className="pill" data-reveal style={delay(0)}>
             <span className="dot" />
