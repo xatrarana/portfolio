@@ -49,7 +49,7 @@ export function WritingCard({ p }: { p: CardPost }) {
         <span className="meta-row">
           <b>{p.date}</b>
           <span>{p.minutes} min read</span>
-          <span>{p.sections} steps</span>
+          <span>{p.sections} sections</span>
           {p.stack ? <span>{p.stack}</span> : null}
         </span>
         <span className="go btn btn-dark">

@@ -162,7 +162,7 @@ let cache: Post[] | null = null
 export function getPosts(): Post[] {
   if (cache) return cache
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".md")) : []
-  cache = files.map(read).sort((a, b) => b.date.localeCompare(a.date))
+  cache = files.map(read).sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug))
   return cache
 }
 
