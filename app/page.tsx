@@ -5,6 +5,7 @@ import { Work } from "@/components/site/work"
 import { Services } from "@/components/site/services"
 import { Experience } from "@/components/site/experience"
 import { Certifications } from "@/components/site/certifications"
+import { Writing } from "@/components/site/writing"
 import { Contact } from "@/components/site/contact"
 import { Footer } from "@/components/site/site-footer"
 import { profile } from "@/lib/content"
@@ -35,6 +36,7 @@ export default function Home() {
         <Services />
         <Experience />
         <Certifications />
+        <Writing />
         <Contact after="light" />
       </main>
       <Footer />

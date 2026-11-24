@@ -41,6 +41,9 @@ export function Contact({ after = "night" }: { after?: "night" | "light" }) {
             <ArrowButton variant="light" onClick={copy}>
               {copied ? "Copied" : "Copy email"}
             </ArrowButton>
+            <ArrowButton href={profile.resume} variant="light" download>
+              Download resume
+            </ArrowButton>
           </div>
           <div className="mail" data-reveal style={delay(420)}>
             {profile.email}

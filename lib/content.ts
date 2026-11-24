@@ -6,6 +6,8 @@ export const profile = {
   email: "mail@chhatrarana.com.np",
   location: "Kathmandu, Nepal",
   status: "Open to new roles",
+  /** Replace public/Chhatra-Rana-Resume.pdf to update the downloadable CV. */
+  resume: "/Chhatra-Rana-Resume.pdf",
   socials: [
     { label: "GitHub", short: "GH", href: "https://github.com/xatrarana" },
     { label: "LinkedIn", short: "in", href: "https://np.linkedin.com/in/chhatra-rana-73b5991b1" },
