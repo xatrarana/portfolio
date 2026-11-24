@@ -372,8 +372,12 @@ section.sec > .wrap { width: 100%; }
 .prose .part + h2 { margin-top: 10px; }
 .prose h2 .no { font-family: var(--font-serif), serif; font-weight: 400; color: var(--muted); margin-right: 10px; }
 .prose h3 { font-size: 15px; font-weight: 700; margin: 26px 0 8px; }
-.prose p, .prose ul { margin: 0 0 14px; color: var(--ink-2); }
-.prose ul { padding-left: 20px; }
+.prose p, .prose ul, .prose ol { margin: 0 0 14px; color: var(--ink-2); }
+.prose ul, .prose ol { padding-left: 20px; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li::marker { color: var(--muted); }
+.prose li + li { margin-top: 4px; }
 .prose a { text-decoration: underline; text-underline-offset: 3px; }
 .prose :not(pre) > code { font-family: ui-monospace, Menlo, monospace; font-size: .86em; background: var(--paper); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; overflow-wrap: anywhere; }
 .codeblock { background: #141414; color: #d6d6d6; border-radius: 12px; margin: 12px 0 18px; overflow: hidden; border: 1px solid #222; }

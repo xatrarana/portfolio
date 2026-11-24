@@ -32,7 +32,9 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
           case "note":
             return (
               <p className="callout" key={i}>
-                <Inline text={b.text} />
+                <span>
+                  <Inline text={b.text} />
+                </span>
               </p>
             )
           case "ul":
@@ -44,6 +46,16 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
                   </li>
                 ))}
               </ul>
+            )
+          case "ol":
+            return (
+              <ol key={i}>
+                {b.items.map((it, j) => (
+                  <li key={j}>
+                    <Inline text={it} />
+                  </li>
+                ))}
+              </ol>
             )
           case "table":
             return (

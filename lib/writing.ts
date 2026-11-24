@@ -8,7 +8,8 @@ import path from "node:path"
  * header between --- lines (title, date, tags, summary; card and heading are
  * optional versions of the title where *words* show in italic serif; visual:
  * failover gives the card the live failover diagram, otherwise it lists the
- * article's sections). Then push.
+ * article's sections; featured: true keeps it as the big card on the home page).
+ * Then push.
  * The home section, nav count, article page and sitemap all pick it up.
  *
  * Markdown supported: "# Part" dividers, "## 1. Section" and "### Sub" headings,
@@ -24,6 +25,7 @@ export type Block =
   | { t: "p"; text: string }
   | { t: "note"; text: string }
   | { t: "ul"; items: string[] }
+  | { t: "ol"; items: string[] }
   | { t: "code"; lang: string; label?: string; code: string }
   | { t: "table"; head: string[]; rows: string[][] }
 
@@ -36,6 +38,7 @@ export type Post = {
   tags: string[]
   stack?: string
   visual?: string
+  featured: boolean
   summary: string
   minutes: number
   sections: number
@@ -65,7 +68,8 @@ function parse(src: string): Block[] {
       continue
     }
     if (line.startsWith("```")) {
-      const [lang = "text", ...rest] = line.slice(3).trim().split(" ")
+      const [first, ...rest] = line.slice(3).trim().split(" ")
+      const lang = first || "text"
       const body: string[] = []
       i++
       while (i < lines.length && !lines[i].startsWith("```")) body.push(lines[i++])
@@ -105,6 +109,12 @@ function parse(src: string): Block[] {
       out.push({ t: "note", text: body.join(" ") })
       continue
     }
+    if (/^\d+\. /.test(line)) {
+      const items: string[] = []
+      while (i < lines.length && /^\d+\. /.test(lines[i])) items.push(lines[i++].replace(/^\d+\. /, ""))
+      out.push({ t: "ol", items })
+      continue
+    }
     if (/^[-*] /.test(line)) {
       const items: string[] = []
       while (i < lines.length && /^[-*] /.test(lines[i])) items.push(lines[i++].slice(2))
@@ -112,7 +122,7 @@ function parse(src: string): Block[] {
       continue
     }
     const body: string[] = []
-    while (i < lines.length && lines[i].trim() && !/^(#|```|\||> |[-*] )/.test(lines[i])) body.push(lines[i++])
+    while (i < lines.length && lines[i].trim() && !/^(#|```|\||> |[-*] |\d+\. )/.test(lines[i])) body.push(lines[i++])
     out.push({ t: "p", text: body.join(" ") })
   }
   return out
@@ -138,6 +148,7 @@ function read(file: string): Post {
     tags: (meta.tags || "").split(",").map((s) => s.trim()).filter(Boolean),
     stack: meta.stack,
     visual: meta.visual,
+    featured: meta.featured === "true",
     summary: meta.summary || "",
     minutes: Math.max(1, Math.round(body.split(/\s+/).length / 230)),
     sections: blocks.filter((b) => b.t === "h2").length,
@@ -153,6 +164,12 @@ export function getPosts(): Post[] {
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".md")) : []
   cache = files.map(read).sort((a, b) => b.date.localeCompare(a.date))
   return cache
+}
+
+/** The article shown big on the home page: the one marked featured, else the newest. */
+export function splitFeatured(posts = getPosts()) {
+  const first = posts.find((p) => p.featured) ?? posts[0]
+  return { first, rest: posts.filter((p) => p !== first) }
 }
 
 export const getPost = (slug: string) => getPosts().find((p) => p.slug === slug)

@@ -5,6 +5,7 @@ heading: LogScale Collector *HA* setup guide
 date: 2026-11-24
 tags: Guide, LogScale, keepalived, Syslog
 visual: failover
+featured: true
 stack: Ubuntu · keepalived · rsyslog
 summary: Configure two Falcon LogScale Collectors in a high-availability pair with keepalived, so syslog clients send to one virtual IP and never notice when a collector fails.
 ---

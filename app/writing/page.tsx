@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { profile } from "@/lib/content"
-import { getPosts } from "@/lib/writing"
+import { getPosts, splitFeatured } from "@/lib/writing"
 import { delay } from "@/lib/reveal"
 import { SectionHead } from "@/components/site/section-head"
 import { WritingCard, WritingRow } from "@/components/site/writing-card"
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function WritingIndex() {
   const posts = getPosts()
-  const [first, ...rest] = posts
+  const { first, rest } = splitFeatured(posts)
   return (
     <>
       <main className="detail cover">

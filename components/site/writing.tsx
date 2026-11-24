@@ -1,4 +1,4 @@
-import { getPosts, postDate } from "@/lib/writing"
+import { getPosts, postDate, splitFeatured } from "@/lib/writing"
 import { delay } from "@/lib/reveal"
 import { SectionHead } from "./section-head"
 import { ArrowButton } from "./arrow-button"
@@ -21,7 +21,7 @@ export const toCard = (p: ReturnType<typeof getPosts>[number]): CardPost => ({
 export function Writing() {
   const posts = getPosts()
   if (!posts.length) return null
-  const [first, ...rest] = posts
+  const { first, rest } = splitFeatured(posts)
   return (
     <section className="sec writing" id="writing">
       <div className="wrap">
