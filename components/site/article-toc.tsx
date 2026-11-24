@@ -69,7 +69,7 @@ export function ArticleToc({ groups }: { groups: Group[] }) {
                   {g.items.map((s) => (
                     <li key={s.id}>
                       <a href={`#${s.id}`} onClick={go(s.id)} aria-current={s.id === cur ? "location" : undefined}>
-                        {s.no ? <span>{s.no.padStart(2, "0")}</span> : null}
+                        <span>{s.no ? s.no.padStart(2, "0") : "·"}</span>
                         {s.text}
                       </a>
                     </li>
