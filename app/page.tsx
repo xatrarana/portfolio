@@ -4,6 +4,7 @@ import { Hero } from "@/components/site/hero"
 import { Work } from "@/components/site/work"
 import { Services } from "@/components/site/services"
 import { Experience } from "@/components/site/experience"
+import { Certifications } from "@/components/site/certifications"
 import { Contact } from "@/components/site/contact"
 import { Footer } from "@/components/site/site-footer"
 import { profile } from "@/lib/content"
@@ -33,7 +34,8 @@ export default function Home() {
         <Work />
         <Services />
         <Experience />
-        <Contact />
+        <Certifications />
+        <Contact after="light" />
       </main>
       <Footer />
     </>
