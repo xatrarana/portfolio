@@ -41,6 +41,7 @@ export default function WritingIndex() {
             <SectionHead
               ghost="Field notes"
               label="Writing"
+              as="h1"
               align="left"
               aside={
                 <>
