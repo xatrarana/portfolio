@@ -152,7 +152,7 @@ export function Certifications() {
         {lb ? (
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/certs/${lb.slug}.webp`} alt={`${lb.title} certificate`} />
+            <img src={`/certs/${lb.slug}.webp`} alt={`${lb.title} certificate`} decoding="async" />
             <figcaption>
               <span>
                 <b>{lb.title}</b>

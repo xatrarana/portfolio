@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import { profile } from "@/lib/content"
 import { getPost, getPosts, postDate } from "@/lib/writing"
 import { delay } from "@/lib/reveal"
+import { articleLd, clip, social, fullName, shortName, siteUrl } from "@/lib/seo"
+import { JsonLd } from "@/components/site/json-ld"
 import { ArticleBody } from "@/components/site/article"
 import { ArticleToc } from "@/components/site/article-toc"
 import { Styled } from "@/components/site/writing-card"
@@ -20,12 +22,23 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const p = getPost(params.slug)
   if (!p) return {}
-  const title = `${p.title} | ${profile.firstName} ${profile.lastName}`
+  const description = clip(p.summary)
+  const shareTitle = `${p.title} | ${shortName}`
   return {
-    title,
-    description: p.summary,
+    title: p.title,
+    description,
+    keywords: p.tags,
+    authors: [{ name: fullName, url: siteUrl }],
     alternates: { canonical: `/writing/${p.slug}` },
-    openGraph: { title, description: p.summary, url: `/writing/${p.slug}`, type: "article", publishedTime: p.date },
+    ...social({
+      title: shareTitle,
+      description,
+      url: `/writing/${p.slug}`,
+      type: "article",
+      publishedTime: p.date || undefined,
+      authors: [siteUrl],
+      tags: p.tags,
+    }),
   }
 }
 
@@ -46,6 +59,7 @@ export default function ArticlePage({ params }: Params) {
 
   return (
     <>
+      <JsonLd data={articleLd(p)} />
       <main className="detail article cover">
         <div className="wrap">
           <div className="detail-bar">

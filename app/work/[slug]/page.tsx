@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { profile, projects } from "@/lib/content"
 import { delay } from "@/lib/reveal"
+import { clip, social, projectPageLd, shortName } from "@/lib/seo"
+import { JsonLd } from "@/components/site/json-ld"
 import { ArrowButton } from "@/components/site/arrow-button"
 import { ProjectShot } from "@/components/site/project-shot"
 import { ProjectCard } from "@/components/site/work"
@@ -18,12 +20,15 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const p = projects.find((x) => x.slug === params.slug)
   if (!p) return {}
-  const title = `${p.name} | ${profile.firstName} ${profile.lastName}`
+  const title = `${p.name}: ${p.tagline}`
+  const description = clip(p.about)
+  const shareTitle = `${title} | ${shortName}`
   return {
     title,
-    description: p.about,
+    description,
+    keywords: [p.name, ...p.chips, p.service, shortName],
     alternates: { canonical: `/work/${p.slug}` },
-    openGraph: { title, description: p.about, url: `/work/${p.slug}` },
+    ...social({ title: shareTitle, description, url: `/work/${p.slug}`, type: "article" }),
   }
 }
 
@@ -54,6 +59,7 @@ export default function ProjectPage({ params }: Params) {
 
   return (
     <>
+      <JsonLd data={projectPageLd(p)} />
       <main className="detail cover">
         <div className="wrap">
           <div className="detail-bar">

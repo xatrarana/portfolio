@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { profile } from "@/lib/content"
+import { shortName, social, writingIndexLd } from "@/lib/seo"
+import { JsonLd } from "@/components/site/json-ld"
 import { getPosts, splitFeatured } from "@/lib/writing"
 import { delay } from "@/lib/reveal"
 import { SectionHead } from "@/components/site/section-head"
@@ -9,10 +10,14 @@ import { Contact } from "@/components/site/contact"
 import { Footer } from "@/components/site/site-footer"
 import { TransitionLink } from "@/components/site/page-transition"
 
+const description =
+  "Guides and field notes on CrowdStrike Falcon Next-Gen SIEM, LogScale, log collection, AI security and detection engineering."
+
 export const metadata: Metadata = {
-  title: `Writing | ${profile.firstName} ${profile.lastName}`,
-  description: "Guides and field notes on SIEM, log collection and detection engineering.",
+  title: "Writing: SIEM, LogScale and detection engineering guides",
+  description,
   alternates: { canonical: "/writing" },
+  ...social({ title: `Writing | ${shortName}`, description, url: "/writing" }),
 }
 
 export default function WritingIndex() {
@@ -20,6 +25,7 @@ export default function WritingIndex() {
   const { first, rest } = splitFeatured(posts)
   return (
     <>
+      <JsonLd data={writingIndexLd(posts)} />
       <main className="detail cover">
         <div className="wrap">
           <div className="detail-bar">
