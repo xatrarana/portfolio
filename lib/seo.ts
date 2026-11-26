@@ -156,7 +156,7 @@ export function articleLd(p: Post) {
         dateModified: p.date || undefined,
         keywords: p.tags.join(", "),
         wordCount: p.minutes * 230,
-        image: abs("/opengraph-image.jpg"),
+        image: abs(`/writing/${p.slug}/opengraph-image`),
         inLanguage: "en",
         author: { "@type": "Person", "@id": personId, name: fullName, url: siteUrl },
         publisher: { "@type": "Person", "@id": personId, name: fullName, url: siteUrl },
@@ -179,11 +179,13 @@ const shareAlt = `${shortName}, ${profile.role} in Kathmandu`
  * Open Graph + Twitter fields for a page. Next.js replaces (not merges) these
  * objects per page, so each page sets the share images and card type again.
  */
-export function social({ title, description, url, type = "website", ...og }: {
+export function social({ title, description, url, type = "website", images = true, ...og }: {
   title: string
   description: string
   url: string
   type?: "website" | "article" | "profile"
+  /** false leaves the images to an opengraph-image / twitter-image file in the route. */
+  images?: boolean
   publishedTime?: string
   authors?: string[]
   tags?: string[]
@@ -196,7 +198,7 @@ export function social({ title, description, url, type = "website", ...og }: {
       type,
       siteName: `${shortName} Portfolio`,
       locale: "en_US",
-      images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: shareAlt, type: "image/jpeg" }],
+      ...(images && { images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: shareAlt, type: "image/jpeg" }] }),
       ...og,
     },
     twitter: {
@@ -205,7 +207,7 @@ export function social({ title, description, url, type = "website", ...og }: {
       description,
       creator: "@Xatra101",
       site: "@Xatra101",
-      images: [{ url: "/twitter-image.jpg", width: 1200, height: 630, alt: shareAlt }],
+      ...(images && { images: [{ url: "/twitter-image.jpg", width: 1200, height: 630, alt: shareAlt }] }),
     },
   }
 }

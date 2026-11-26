@@ -35,6 +35,7 @@ export function generateMetadata({ params }: Params): Metadata {
       description,
       url: `/writing/${p.slug}`,
       type: "article",
+      images: false,
       publishedTime: p.date || undefined,
       authors: [siteUrl],
       tags: p.tags,

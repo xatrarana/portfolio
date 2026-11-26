@@ -526,3 +526,12 @@ html.js [data-reveal="letters"]:not(.in) .ch { opacity: 0; }
 [data-reveal="letters"].in .ch { animation: letterIn .8s var(--ease) calc(var(--d, 0ms) + var(--i) * 32ms) backwards; }
 @keyframes letterIn { from { opacity: 0; filter: blur(8px); transform: translateY(.25em); } }
 @media (prefers-reduced-motion: reduce) { html.js [data-reveal]:not(.in), html.js [data-reveal="letters"]:not(.in) .ch { opacity: 1; } }
+
+/* 404 */
+.nf .nf-in { padding-block: 40px 120px; min-height: 60vh; }
+.nf-code { font-family: var(--display); font-weight: 700; font-stretch: 110%; font-size: clamp(96px, 18vw, 220px); line-height: .9; letter-spacing: -.04em; margin: 0 0 8px; color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+.nf h1 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 4.4vw, 54px); line-height: 1.05; letter-spacing: -.02em; margin: 0; }
+.nf h1 em { font-family: var(--font-serif), serif; font-weight: 400; }
+.nf-links { list-style: none; padding: 0; margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.nf-links a { display: inline-block; font-size: 13px; font-weight: 600; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; transition: background .3s var(--ease), color .3s var(--ease); }
+.nf-links a:hover { background: var(--ink); color: #fff; }
