@@ -1,10 +1,13 @@
 import type React from "react"
 import { Archivo, Instrument_Serif, Manrope, Mrs_Saint_Delafield } from "next/font/google"
+import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from "react"
 import { Motion } from "@/components/site/motion"
 import { SmoothScroll } from "@/components/site/smooth-scroll"
 import { PageTransition } from "@/components/site/page-transition"
+import { fullName, shortName, siteUrl, social } from "@/lib/seo"
 import "./globals.css"
 import "./site.css"
 
@@ -36,56 +39,46 @@ const manrope = Manrope({
   display: "swap",
 })
 
-const title = "Chhatra Rana | Software & Security Engineer"
+const title = "Chhatra Rana | Software & Security Engineer in Kathmandu"
 const description =
-  "Software engineer in Kathmandu building secure web systems and security tooling: Node.js, .NET, AWS, SIEM and intrusion detection."
+  "Chhatra Rana is a software and security engineer in Kathmandu, Nepal, building secure web systems, CrowdStrike Falcon SIEM detections and security tooling."
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#f3f3f3",
+}
 
-export const metadata = {
-  title,
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: { default: title, template: `%s | ${shortName}` },
   description,
-  keywords:
-    "Chhatra, Chhatra Rana, Personal Portfolio, Software Engineer, Security Engineer, Full-Stack Developer, Secure Coding, Software Developer, JavaScript, Laravel, .NET, Developer Portfolio",
-  authors: [
-    { name: "Chhatra Bahadur Rana", url: "https://chhatrarana.com.np" },
+  applicationName: `${shortName} Portfolio`,
+  keywords: [
+    "Chhatra Rana",
+    "Chhatra Bahadur Rana",
+    "Software Engineer Nepal",
+    "Security Engineer Kathmandu",
+    "CrowdStrike Falcon",
+    "Next-Gen SIEM",
+    "LogScale",
+    "Detection engineering",
+    "Full-stack developer",
+    "Portfolio",
   ],
-  creator: "Chhatra Bahadur Rana",
-  viewport: "width=device-width, initial-scale=1.0",
-  themeColor: "#ffffff",
-  metadataBase: new URL("https://chhatrarana.com.np"),
-  alternates: {
-    canonical: "/",
-  },
+  authors: [{ name: fullName, url: siteUrl }],
+  creator: fullName,
+  publisher: fullName,
+  alternates: { canonical: "/" },
+  manifest: "/site.webmanifest",
+  formatDetection: { email: false, telephone: false, address: false },
   robots: {
     index: true,
     follow: true,
-    nocache: false,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
-  openGraph: {
-    title,
-    description,
-    url: "https://chhatrarana.com.np",
-    siteName: "Chhatra Rana Portfolio",
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: "/chhatra-portrait.webp",
-        width: 860,
-        height: 996,
-        alt: "Portrait of Chhatra Rana",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary",
-    title,
-    description,
-    images: ["/chhatra-portrait.webp"],
-    creator: "@Xatra101",
-    site: "@Xatra101",
-  },
-};
+  ...social({ title, description, url: "/", type: "profile" }),
+}
 
 
 export default function RootLayout({
@@ -95,8 +88,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${archivo.variable} ${manrope.variable} ${serif.variable} ${signature.variable}`} suppressHydrationWarning>
-       <head>
-        <link rel="manifest" href="/site.webmanifest" />
+      <head>
         {/* Lets CSS hide not-yet-revealed elements only when JS is running. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
@@ -106,8 +98,9 @@ export default function RootLayout({
           <SmoothScroll />
           {children}
           <PageTransition />
-          <Analytics />
         </Suspense>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
